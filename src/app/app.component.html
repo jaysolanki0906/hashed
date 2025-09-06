@@ -1,5 +1,6 @@
-<!-- Main outlet -->
+
 <router-outlet></router-outlet>
 
-<!-- Secondary outlet (popup container) -->
-<router-outlet name="settings"></router-outlet>
+@if (settings.isOpen()) {
+  <app-settings-wrapper></app-settings-wrapper>
+}

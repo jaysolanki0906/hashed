@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SettingsService } from '../settings.service';
 
@@ -6,7 +6,8 @@ import { SettingsService } from '../settings.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent  {
+
   fragment: string | null = null;
 
   constructor(
@@ -14,11 +15,12 @@ export class DashboardComponent implements OnInit {
     public settingsService: SettingsService
   ) {}
 
-  ngOnInit() {
-    this.route.fragment.subscribe(f => {
-      this.fragment = f;
-      // when fragment changes, inject correct component into settings outlet
-      this.settingsService.renderInOutlet(this.fragment);
-    });
+  close() {
+    this.settingsService.close();
+    this.settingsService.closePopup();
+  }
+  openpopup()
+  {
+    this.settingsService.openPopup();
   }
 }
